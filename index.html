@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>הרב אלדר לוי - Absolute Imperial Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;500;700;900&family=Assistant:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gold: #b38728;
+            --gold-light: #f1d592;
+            --deep-black: #020304;
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            font-family: 'Assistant', sans-serif;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100dvh;
+            margin: 0;
+            perspective: 2000px;
+            touch-action: none;
+        }
+
+        /* Ambient background glow */
+        .ambient-field {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(179, 135, 40, 0.15) 0%, transparent 60%),
+                radial-gradient(at 0% 0%, rgba(179, 135, 40, 0.08) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* The Card Frame */
+        .card-frame {
+            width: 90vw;
+            max-width: 360px;
+            height: calc(100dvh - 80px - var(--safe-top) - var(--safe-bottom));
+            max-height: 580px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .imperial-panel {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(165deg, #0f1115 0%, #030405 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(179, 135, 40, 0.3);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 1.75rem;
+            overflow: hidden;
+        }
+
+        /* Moving Light Ray & Shimmer */
+        .ray {
+            position: absolute;
+            inset: -100%;
+            background: linear-gradient(var(--angle, 45deg), 
+                transparent 40%, 
+                rgba(179, 135, 40, 0.1) 48%, 
+                rgba(251, 213, 146, 0.3) 50%, 
+                rgba(179, 135, 40, 0.1) 52%, 
+                transparent 60%);
+            pointer-events: none;
+            mix-blend-mode: color-dodge;
+        }
+
+        /* Typography - The Name */
+        .main-identity {
+            text-align: center;
+            transform: translateZ(80px);
+            width: 100%;
+        }
+
+        .prefix {
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px rgba(179, 135, 40, 0.3));
+        }
+
+        .name-text {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: clamp(2.4rem, 11vw, 3.4rem);
+            font-weight: 900;
+            line-height: 0.95;
+            background: linear-gradient(to bottom, #ffffff 20%, #e2c699 60%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+            white-space: nowrap;
+        }
+
+        .sub-tagline {
+            margin-top: 1.2rem;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.25em;
+            font-weight: 400;
+        }
+
+        /* Executive Navigation */
+        .btn-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            transform: translateZ(50px);
+        }
+
+        .btn-imperial {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(179, 135, 40, 0.2);
+            border-right: 3px solid var(--gold);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+
+        .btn-imperial:active {
+            background: rgba(179, 135, 40, 0.2);
+            transform: scale(0.97) translateZ(-5px);
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        @media (hover: hover) {
+            .btn-imperial:hover {
+                background: rgba(179, 135, 40, 0.15);
+                border-color: var(--gold-light);
+                padding-left: 1.75rem;
+            }
+        }
+
+        /* Scales Logo Layer */
+        .logo-layer {
+            transform: translateZ(40px);
+            filter: drop-shadow(0 0 15px rgba(179, 135, 40, 0.4));
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo {
+            font-size: 10px;
+            color: rgba(179, 135, 40, 0.4);
+            letter-spacing: 0.2em;
+            text-align: center;
+            font-weight: 400;
+            transform: translateZ(30px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-field" id="ambient"></div>
+
+    <div class="card-frame" id="card">
+        <div class="imperial-panel">
+            <div class="ray" id="ray"></div>
+            
+            <!-- Logo Section -->
+            <div class="logo-layer">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v18M7 21h10M3 7h18"/>
+                    <path d="M3 7l3 9h-6l3-9M6 16c0 1.1-.9 2-2 2s-2-.9-2-2"/>
+                    <path d="M18 7l3 9h-6l3-9M21 16c0 1.1-.9 2-2 2s-2-.9-2-2"/>
+                </svg>
+            </div>
+
+            <!-- Identity Section -->
+            <div class="main-identity">
+                <div class="prefix">הרב</div>
+                <h1 class="name-text">אלדר לוי</h1>
+                <div class="sub-tagline">טוען רבני • דיין מוסמך</div>
+                <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-6"></div>
+            </div>
+
+            <!-- Action Section -->
+            <div class="btn-group">
+                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-imperial">
+                    <i data-lucide="globe" size="18"></i>
+                    <span>לכניסה לאתר הרשמי</span>
+                    <i data-lucide="chevron-left" size="16"></i>
+                </a>
+                
+                <a href="tel:0528219928" class="btn-imperial">
+                    <i data-lucide="phone" size="18"></i>
+                    <span>חיוג ישיר למשרד</span>
+                    <i data-lucide="chevron-left" size="16"></i>
+                </a>
+
+                <a href="mailto:Tifarteha@gmail.com" class="btn-imperial">
+                    <i data-lucide="shield-check" size="18"></i>
+                    <span>פנייה דיסקרטית</span>
+                    <i data-lucide="chevron-left" size="16"></i>
+                </a>
+            </div>
+
+            <!-- Footer Section (Cities Removed) -->
+            <div class="footer-logo">
+                עוצמה הלכתית ויושרה מקצועית
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const card = document.getElementById('card');
+        const ambient = document.getElementById('ambient');
+        const ray = document.getElementById('ray');
+
+        let rafId = null;
+        const move = (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            
+            rafId = requestAnimationFrame(() => {
+                const x = e.clientX || (e.touches && e.touches[0].clientX);
+                const y = e.clientY || (e.touches && e.touches[0].clientY);
+                
+                if (!x || !y) return;
+
+                ambient.style.setProperty('--px', `${x}px`);
+                ambient.style.setProperty('--py', `${y}px`);
+
+                const cx = window.innerWidth / 2;
+                const cy = window.innerHeight / 2;
+                
+                // Tilt logic weakened by half (dividing by 40 instead of 20)
+                const dx = (x - cx) / 40;
+                const dy = (y - cy) / 40;
+                card.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
+                
+                const angle = Math.atan2(y - cy, x - cx) * (180 / Math.PI) + 135;
+                ray.style.setProperty('--angle', `${angle}deg`);
+            });
+        };
+
+        window.addEventListener('mousemove', move);
+        window.addEventListener('touchmove', (e) => {
+            if(e.touches.length === 1) move(e);
+        }, { passive: false });
+
+        const reset = () => {
+            card.style.transition = "transform 1.5s cubic-bezier(0.19, 1, 0.22, 1)";
+            card.style.transform = "rotateY(0deg) rotateX(0deg)";
+            setTimeout(() => { card.style.transition = "transform 0.1s ease-out"; }, 1500);
+        };
+
+        window.addEventListener('mouseleave', reset);
+        window.addEventListener('touchend', reset);
+
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.inset = '0';
+        canvas.style.zIndex = '-2';
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        let dots = [];
+        function init() {
+            resize();
+            const count = window.innerWidth < 768 ? 40 : 80;
+            dots = Array(count).fill().map(() => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                s: Math.random() * 0.8,
+                v: Math.random() * 0.1 + 0.05,
+                o: Math.random()
+            }));
+        }
+
+        function draw() {
+            ctx.fillStyle = '#020304';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            dots.forEach(d => {
+                d.y -= d.v;
+                if (d.y < 0) d.y = canvas.height;
+                ctx.fillStyle = `rgba(179, 135, 40, ${d.o * 0.2})`;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.s, 0, Math.PI*2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+    </script>
+</body>
+</html>
