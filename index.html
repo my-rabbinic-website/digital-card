@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>הרב אלדר לוי - Noble Imperial Edition</title>
+    <title>הרב אלדר לוי - Legal Prestige Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;500;700;900&family=Assistant:wght@200;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -11,10 +11,11 @@
         :root {
             --gold: #b38728;
             --gold-light: #f1d592;
-            --deep-black: #010203;
-            /* Dynamic padding for all mobile types */
-            --safe-top: env(safe-area-inset-top, 20px);
-            --safe-bottom: env(safe-area-inset-bottom, 20px);
+            --gold-deep: #8a651b;
+            --deep-navy: #080c14;
+            --surface: #ffffff;
+            --safe-top: env(safe-area-inset-top, 24px);
+            --safe-bottom: env(safe-area-inset-bottom, 24px);
         }
         
         * {
@@ -24,243 +25,228 @@
         }
 
         body {
-            background-color: var(--deep-black);
+            background-color: var(--surface);
             font-family: 'Assistant', sans-serif;
-            color: white;
-            overflow: hidden;
+            margin: 0;
+            height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100dvh;
-            margin: 0;
-            perspective: 1200px;
+            overflow: hidden;
+            perspective: 2500px;
             touch-action: none;
-            opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Fluid Background with high-end grain */
-        .ambient-field {
+        /* Ambient Glow Background */
+        .ambient-stage {
             position: fixed;
             inset: 0;
             background: 
-                radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(179, 135, 40, 0.15) 0%, transparent 70%),
-                linear-gradient(180deg, #080a0c 0%, #010203 100%);
+                radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(179, 135, 40, 0.04) 0%, transparent 70%),
+                var(--surface);
             z-index: -1;
         }
 
-        /* The Card Frame - Auto Scaling */
-        .card-frame {
+        /* Card Container - Fine-tuned stability */
+        .card-perspective {
             width: 90vw;
             max-width: 380px;
-            /* Fits perfectly within mobile screens without overflow */
-            height: clamp(500px, 82dvh, 680px);
+            height: clamp(560px, 86dvh, 740px);
             position: relative;
             transform-style: preserve-3d;
             will-change: transform;
         }
 
-        .imperial-panel {
+        .card-inner {
             position: absolute;
             inset: 0;
-            background: linear-gradient(145deg, #0e1116 0%, #020304 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(179, 135, 40, 0.35);
+            background: linear-gradient(145deg, #1a222e 0%, var(--deep-navy) 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(179, 135, 40, 0.3);
             box-shadow: 
-                0 40px 100px rgba(0,0,0,0.9),
-                inset 0 0 30px rgba(179, 135, 40, 0.03);
+                0 30px 80px -10px rgba(0,0,0,0.45),
+                0 15px 30px -5px rgba(179, 135, 40, 0.08);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: calc(var(--safe-top) + 2rem) 1.5rem calc(var(--safe-bottom) + 1.5rem);
+            padding: calc(var(--safe-top) + 1.2rem) 1.5rem calc(var(--safe-bottom) + 1rem);
             overflow: hidden;
+            transform-style: preserve-3d;
         }
 
-        /* Luxury Light Ray - Ultra Slow Inertia */
-        .ray {
+        /* Premium Paper Grain */
+        .card-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Subtle Dynamic Glint */
+        .light-glint {
             position: absolute;
             inset: -150%;
-            background: linear-gradient(var(--angle, 45deg), 
-                transparent 40%, 
-                rgba(255, 255, 255, 0.03) 46%, 
-                rgba(251, 213, 146, 0.2) 50%, 
-                rgba(255, 255, 255, 0.03) 54%, 
-                transparent 60%);
+            background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 60%);
             pointer-events: none;
-            mix-blend-mode: screen;
-            filter: blur(20px);
-            opacity: 0.8;
+            z-index: 4;
+            mix-blend-mode: soft-light;
         }
 
-        /* Branding */
-        .main-identity {
-            text-align: center;
-            transform: translateZ(90px);
-            width: 100%;
-        }
-
-        .prefix {
-            font-size: 0.9rem;
-            color: var(--gold);
-            letter-spacing: 0.5em;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 0 10px rgba(179, 135, 40, 0.3);
-        }
-
-        .name-text {
+        /* Branding Elements */
+        .name-master {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: clamp(2.5rem, 11.5vw, 3.8rem);
+            font-size: clamp(2.8rem, 12vw, 4.2rem);
             font-weight: 900;
-            line-height: 1;
-            background: linear-gradient(to bottom, #ffffff 10%, var(--gold-light) 50%, var(--gold) 90%);
+            line-height: 0.95;
+            background: linear-gradient(180deg, #fff 10%, var(--gold-light) 50%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
         }
 
-        .sub-tagline {
-            margin-top: 1.25rem;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 0.3em;
+        .prefix-label {
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.6em;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .role-desc {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.4em;
             font-weight: 400;
         }
 
-        /* Navigation Buttons - Optimized for Clarity */
-        .btn-group {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            transform: translateZ(60px);
-            z-index: 50; /* Ensuring clickability */
-        }
-
-        .btn-imperial {
+        /* Interaction Elements */
+        .btn-premium {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.1rem 1.4rem;
+            padding: 1.15rem 1.4rem;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(179, 135, 40, 0.2);
-            border-right: 4px solid var(--gold);
-            text-decoration: none;
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(179, 135, 40, 0.25);
+            border-radius: 12px;
+            color: white !important;
+            text-decoration: none !important;
+            margin-bottom: 0.9rem;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border-radius: 4px;
-            pointer-events: auto; /* Explicitly allow pointer events */
-            cursor: pointer;
         }
 
-        .btn-imperial:active {
-            background: rgba(179, 135, 40, 0.15);
-            transform: scale(0.97) translateZ(-5px);
+        .btn-premium:active {
+            transform: scale(0.975);
+            background: rgba(179, 135, 40, 0.1);
         }
 
-        @media (hover: hover) {
-            .btn-imperial:hover {
-                background: rgba(255, 255, 255, 0.05);
-                border-color: rgba(179, 135, 40, 0.5);
-            }
+        .btn-premium .btn-text {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: 1.05rem;
         }
 
-        /* Scales Emblem */
-        .logo-layer {
-            transform: translateZ(40px);
-            opacity: 0.85;
-            margin-bottom: 1rem;
+        /* Justice Scales Logo */
+        .scales-seal {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(179, 135, 40, 0.1) 0%, transparent 75%);
+            border-radius: 50%;
         }
 
-        .bsd-tag {
+        .bsd {
             position: absolute;
             top: var(--safe-top);
             right: 1.5rem;
-            font-size: 10px;
-            color: var(--gold);
-            opacity: 0.5;
+            font-size: 11px;
+            color: var(--gold-deep);
+            font-weight: 900;
             letter-spacing: 0.1em;
-            font-weight: 700;
+            opacity: 0.6;
         }
 
-        .footer-logo {
-            font-size: 10px;
-            color: var(--gold);
+        .separator {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 1.5rem auto;
             opacity: 0.4;
-            letter-spacing: 0.4em;
-            text-align: center;
-            font-weight: 700;
-            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-field" id="ambient"></div>
+    <div class="ambient-stage" id="stage"></div>
 
-    <div class="card-frame" id="card">
-        <div class="imperial-panel">
-            <div class="ray" id="ray"></div>
+    <div class="card-perspective" id="cardContainer">
+        <div class="card-inner">
+            <div class="light-glint" id="glint"></div>
+            <div class="bsd">בס"ד</div>
             
-            <div class="bsd-tag">בס"ד</div>
-            
-            <!-- Scaled Scales Logo -->
-            <div class="logo-layer">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
-                    <path d="M12 3v17M9 21h6M4 7c0-1 4-1 8-1s8 0 8 1"/>
-                    <path d="M4 7l-2 8h4l-2-8zM20 7l-2 8h4l-2-8z" fill="rgba(179, 135, 40, 0.1)"/>
+            <!-- Logo Section -->
+            <div class="scales-seal" style="transform: translateZ(35px)">
+                <!-- Improved High-Detail Scales of Justice -->
+                <svg width="55" height="55" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Base Stand -->
+                    <path d="M12 4V20M8 20H16" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/>
+                    <!-- Main Beam -->
+                    <path d="M12 5L4 8.5M12 5L20 8.5" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Left Scale -->
+                    <path d="M4 8.5L2 14C2 15.5 3.5 16.5 5 16.5C6.5 16.5 8 15.5 8 14L6 8.5" stroke="var(--gold)" stroke-width="1" stroke-linejoin="round"/>
+                    <!-- Right Scale -->
+                    <path d="M20 8.5L22 14C22 15.5 20.5 16.5 19 16.5C17.5 16.5 16 15.5 16 14L18 8.5" stroke="var(--gold)" stroke-width="1" stroke-linejoin="round"/>
+                    <!-- Pivot Point -->
+                    <circle cx="12" cy="5" r="1" fill="var(--gold)"/>
                 </svg>
             </div>
 
-            <!-- Identity -->
-            <div class="main-identity">
-                <div class="prefix">הרב</div>
-                <h1 class="name-text">אלדר לוי</h1>
-                <div class="sub-tagline">טוען רבני • דיין מוסמך</div>
-                <div class="flex items-center justify-center gap-4 mt-6">
-                    <div class="w-12 h-[1px] bg-gold opacity-30"></div>
+            <!-- Identity Section -->
+            <div class="text-center" style="transform: translateZ(75px)">
+                <div class="prefix-label">הרב</div>
+                <h1 class="name-master">אלדר לוי</h1>
+                <div class="role-desc">טוען רבני • דיין מוסמך</div>
+                <div class="separator"></div>
+            </div>
+
+            <!-- Interaction Buttons -->
+            <div class="mt-auto mb-8" style="transform: translateZ(50px)">
+                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-premium">
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="shield-check" size="20" class="text-gold"></i>
+                        <span class="btn-text">האתר הרשמי</span>
+                    </div>
+                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
+                </a>
+
+                <a href="tel:0528219928" class="btn-premium">
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="phone-call" size="20" class="text-gold"></i>
+                        <span class="btn-text">חיוג ישיר לייעוץ</span>
+                    </div>
+                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
+                </a>
+
+                <a href="mailto:Tifarteha@gmail.com" class="btn-premium">
+                    <div class="flex items-center gap-4">
+                        <i data-lucide="scale" size="20" class="text-gold"></i>
+                        <span class="btn-text">פנייה דיסקרטית</span>
+                    </div>
+                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
+                </a>
+            </div>
+
+            <!-- Institutional Footer -->
+            <div class="text-center" style="transform: translateZ(20px)">
+                <div class="text-[9px] text-gold-deep font-black tracking-[0.5em] uppercase opacity-40">
+                    Traditional Values • Legal Excellence
                 </div>
-            </div>
-
-            <!-- Actions -->
-            <div class="btn-group">
-                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-imperial" onclick="event.stopPropagation()">
-                    <div class="flex items-center gap-4">
-                        <i data-lucide="layout" size="18" class="text-gold"></i>
-                        <span>ביקור באתר הרשמי</span>
-                    </div>
-                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
-                </a>
-                
-                <a href="tel:0528219928" class="btn-imperial" onclick="event.stopPropagation()">
-                    <div class="flex items-center gap-4">
-                        <i data-lucide="phone-call" size="18" class="text-gold"></i>
-                        <span>חיוג ישיר למשרד</span>
-                    </div>
-                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
-                </a>
-
-                <a href="mailto:Tifarteha@gmail.com" class="btn-imperial" onclick="event.stopPropagation()">
-                    <div class="flex items-center gap-4">
-                        <i data-lucide="shield-check" size="18" class="text-gold"></i>
-                        <span>פנייה דיסקרטית</span>
-                    </div>
-                    <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
-                </a>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer-logo">
-                Elite Rabbinic Counsel
             </div>
         </div>
     </div>
@@ -268,54 +254,59 @@
     <script>
         lucide.createIcons();
 
-        const card = document.getElementById('card');
-        const ambient = document.getElementById('ambient');
-        const ray = document.getElementById('ray');
+        const card = document.getElementById('cardContainer');
+        const stage = document.getElementById('stage');
+        const glint = document.getElementById('glint');
 
-        let curX = window.innerWidth / 2, curY = window.innerHeight / 2;
-        let tgtX = curX, tgtY = curY;
+        let pointerX = window.innerWidth / 2;
+        let pointerY = window.innerHeight / 2;
+        let rotationX = 0, rotationY = 0;
+        let targetX = 0, targetY = 0;
 
-        // Ultra-smooth follow logic (Inertia)
-        function tick() {
-            curX += (tgtX - curX) * 0.05;
-            curY += (tgtY - curY) * 0.05;
+        function animate() {
+            // High damping for ultra-stable motion (0.03)
+            rotationX += (targetX - rotationX) * 0.03;
+            rotationY += (targetY - rotationY) * 0.03;
 
-            ambient.style.setProperty('--px', `${curX}px`);
-            ambient.style.setProperty('--py', `${curY}px`);
+            stage.style.setProperty('--px', `${pointerX}px`);
+            stage.style.setProperty('--py', `${pointerY}px`);
 
-            const dx = (curX - window.innerWidth / 2) / 45;
-            const dy = (curY - window.innerHeight / 2) / 45;
+            // Minimal rotation for prestige (max 5 degrees)
+            card.style.transform = `rotateX(${-rotationY * 5}deg) rotateY(${rotationX * 5}deg)`;
             
-            card.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
-            
-            const angle = Math.atan2(curY - window.innerHeight/2, curX - window.innerWidth/2) * (180 / Math.PI) + 135;
-            ray.style.setProperty('--angle', `${angle}deg`);
+            // Glint follows pointer
+            const glintX = (pointerX / window.innerWidth) * 100;
+            const glintY = (pointerY / window.innerHeight) * 100;
+            glint.style.background = `radial-gradient(circle at ${glintX}% ${glintY}%, rgba(255,255,255,0.08) 0%, transparent 60%)`;
 
-            requestAnimationFrame(tick);
+            requestAnimationFrame(animate);
         }
 
         const handleInput = (e) => {
-            // Only update target if not clicking on buttons to keep ray moving but allow clicks
-            tgtX = e.clientX || (e.touches && e.touches[0].clientX);
-            tgtY = e.clientY || (e.touches && e.touches[0].clientY);
+            pointerX = e.clientX || (e.touches && e.touches[0].clientX);
+            pointerY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            targetX = (pointerX - window.innerWidth / 2) / (window.innerWidth / 2);
+            targetY = (pointerY - window.innerHeight / 2) / (window.innerHeight / 2);
         };
 
         window.addEventListener('mousemove', handleInput);
         window.addEventListener('touchmove', (e) => {
-            // Prevent scrolling on mobile while moving finger over card, but allow clicks
-            if (e.touches.length === 1 && !e.target.closest('.btn-imperial')) {
+            if (e.touches.length === 1 && !e.target.closest('.btn-premium')) {
                 handleInput(e);
             }
         }, { passive: true });
 
+        // Auto-center when not touching
         window.addEventListener('touchend', () => {
-            tgtX = window.innerWidth / 2;
-            tgtY = window.innerHeight / 2;
+            targetX = 0; targetY = 0;
+            pointerX = window.innerWidth / 2;
+            pointerY = window.innerHeight / 2;
         });
 
-        requestAnimationFrame(tick);
+        requestAnimationFrame(animate);
 
-        // Particle Glow
+        // Minimalist Ambient Particles
         const canvas = document.createElement('canvas');
         canvas.style.position = 'fixed';
         canvas.style.inset = '0';
@@ -324,31 +315,31 @@
         document.body.appendChild(canvas);
         const ctx = canvas.getContext('2d');
 
-        let stars = [];
-        function setup() {
+        let particles = [];
+        const setup = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            stars = Array(50).fill().map(() => ({
+            particles = Array(12).fill().map(() => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                r: Math.random() * 0.7,
-                v: Math.random() * 0.2 + 0.1
+                size: Math.random() * 0.6 + 0.1,
+                opacity: Math.random() * 0.1
             }));
-        }
+        };
 
-        function draw() {
-            ctx.fillStyle = '#010203';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(179, 135, 40, 0.2)';
-            stars.forEach(s => {
-                s.y -= s.v;
-                if (s.y < 0) s.y = canvas.height;
+        const draw = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#b38728';
+            particles.forEach(p => {
+                p.y -= 0.04;
+                if (p.y < 0) p.y = canvas.height;
+                ctx.globalAlpha = p.opacity;
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fill();
             });
             requestAnimationFrame(draw);
-        }
+        };
 
         window.addEventListener('resize', setup);
         setup();
