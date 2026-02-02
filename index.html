@@ -12,7 +12,6 @@
             --gold: #b38728;
             --gold-light: #f1d592;
             --deep-black: #010203;
-            /* Dynamic padding for all mobile types */
             --safe-top: env(safe-area-inset-top, 20px);
             --safe-bottom: env(safe-area-inset-bottom, 20px);
         }
@@ -44,7 +43,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Fluid Background with high-end grain */
         .ambient-field {
             position: fixed;
             inset: 0;
@@ -54,11 +52,9 @@
             z-index: -1;
         }
 
-        /* The Card Frame - Auto Scaling */
         .card-frame {
             width: 90vw;
             max-width: 380px;
-            /* Fits perfectly within mobile screens without overflow */
             height: clamp(500px, 82dvh, 680px);
             position: relative;
             transform-style: preserve-3d;
@@ -82,7 +78,6 @@
             overflow: hidden;
         }
 
-        /* Luxury Light Ray - Ultra Slow Inertia */
         .ray {
             position: absolute;
             inset: -150%;
@@ -96,13 +91,14 @@
             mix-blend-mode: screen;
             filter: blur(20px);
             opacity: 0.8;
+            z-index: 5;
         }
 
-        /* Branding */
         .main-identity {
             text-align: center;
             transform: translateZ(90px);
             width: 100%;
+            z-index: 10;
         }
 
         .prefix {
@@ -111,7 +107,6 @@
             letter-spacing: 0.5em;
             font-weight: 700;
             margin-bottom: 0.75rem;
-            text-shadow: 0 0 10px rgba(179, 135, 40, 0.3);
         }
 
         .name-text {
@@ -122,7 +117,6 @@
             background: linear-gradient(to bottom, #ffffff 10%, var(--gold-light) 50%, var(--gold) 90%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
         }
 
         .sub-tagline {
@@ -133,13 +127,14 @@
             font-weight: 400;
         }
 
-        /* Navigation Buttons - Optimized for Clarity */
         .btn-group {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 1rem;
             transform: translateZ(60px);
+            z-index: 100; /* Higher priority for touch */
+            position: relative;
         }
 
         .btn-imperial {
@@ -148,23 +143,24 @@
             align-items: center;
             justify-content: space-between;
             padding: 1.1rem 1.4rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(179, 135, 40, 0.2);
             border-right: 4px solid var(--gold);
-            text-decoration: none;
-            color: white;
+            text-decoration: none !important;
+            color: white !important;
             font-size: 0.95rem;
             font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.3s ease;
             border-radius: 4px;
+            cursor: pointer;
+            pointer-events: auto;
         }
 
         .btn-imperial:active {
-            background: rgba(179, 135, 40, 0.15);
-            transform: scale(0.97) translateZ(-5px);
+            background: rgba(179, 135, 40, 0.2);
+            transform: scale(0.97);
         }
 
-        /* Scales Emblem */
         .logo-layer {
             transform: translateZ(40px);
             opacity: 0.85;
@@ -178,7 +174,6 @@
             font-size: 10px;
             color: var(--gold);
             opacity: 0.5;
-            letter-spacing: 0.1em;
             font-weight: 700;
         }
 
@@ -203,7 +198,6 @@
             
             <div class="bsd-tag">בס"ד</div>
             
-            <!-- Scaled Scales Logo -->
             <div class="logo-layer">
                 <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
                     <path d="M12 3v17M9 21h6M4 7c0-1 4-1 8-1s8 0 8 1"/>
@@ -211,7 +205,6 @@
                 </svg>
             </div>
 
-            <!-- Identity -->
             <div class="main-identity">
                 <div class="prefix">הרב</div>
                 <h1 class="name-text">אלדר לוי</h1>
@@ -221,9 +214,9 @@
                 </div>
             </div>
 
-            <!-- Actions -->
+            <!-- Enhanced Action Group -->
             <div class="btn-group">
-                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-imperial">
+                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-imperial" onclick="event.stopPropagation()">
                     <div class="flex items-center gap-4">
                         <i data-lucide="layout" size="18" class="text-gold"></i>
                         <span>ביקור באתר הרשמי</span>
@@ -231,7 +224,7 @@
                     <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
                 </a>
                 
-                <a href="tel:0528219928" class="btn-imperial">
+                <a href="tel:0528219928" class="btn-imperial" onclick="event.stopPropagation()">
                     <div class="flex items-center gap-4">
                         <i data-lucide="phone-call" size="18" class="text-gold"></i>
                         <span>חיוג ישיר למשרד</span>
@@ -239,7 +232,7 @@
                     <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
                 </a>
 
-                <a href="mailto:Tifarteha@gmail.com" class="btn-imperial">
+                <a href="mailto:Tifarteha@gmail.com" class="btn-imperial" onclick="event.stopPropagation()">
                     <div class="flex items-center gap-4">
                         <i data-lucide="shield-check" size="18" class="text-gold"></i>
                         <span>פנייה דיסקרטית</span>
@@ -248,7 +241,6 @@
                 </a>
             </div>
 
-            <!-- Footer -->
             <div class="footer-logo">
                 Elite Rabbinic Counsel
             </div>
@@ -265,7 +257,6 @@
         let curX = window.innerWidth / 2, curY = window.innerHeight / 2;
         let tgtX = curX, tgtY = curY;
 
-        // Ultra-smooth follow logic (Inertia)
         function tick() {
             curX += (tgtX - curX) * 0.05;
             curY += (tgtY - curY) * 0.05;
@@ -285,14 +276,19 @@
         }
 
         const handleInput = (e) => {
+            // Only update motion if we're not interacting with buttons
+            if (e.target.closest('.btn-imperial')) return;
+            
             tgtX = e.clientX || (e.touches && e.touches[0].clientX);
             tgtY = e.clientY || (e.touches && e.touches[0].clientY);
         };
 
         window.addEventListener('mousemove', handleInput);
         window.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 1) handleInput(e);
-        }, { passive: false });
+            if (e.touches.length === 1 && !e.target.closest('.btn-imperial')) {
+                handleInput(e);
+            }
+        }, { passive: true });
 
         window.addEventListener('touchend', () => {
             tgtX = window.innerWidth / 2;
@@ -301,7 +297,6 @@
 
         requestAnimationFrame(tick);
 
-        // Particle Glow
         const canvas = document.createElement('canvas');
         canvas.style.position = 'fixed';
         canvas.style.inset = '0';
@@ -314,10 +309,10 @@
         function setup() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            stars = Array(50).fill().map(() => ({
+            stars = Array(40).fill().map(() => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                r: Math.random() * 0.7,
+                r: Math.random() * 0.8,
                 v: Math.random() * 0.2 + 0.1
             }));
         }
