@@ -15,20 +15,16 @@
             --gold-rich: #c59d5f;
             --gold-dark: #8a6e3e;
             --gold-shadow: #3d2b1f;
-            
             --onyx-black: #050505;
             --onyx-light: #141416;
-            
             --safe-top: env(safe-area-inset-top, 24px);
             --safe-bottom: env(safe-area-inset-bottom, 24px);
         }
-        
         * {
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             box-sizing: border-box;
         }
-
         body {
             background-color: var(--onyx-black);
             font-family: 'Assistant', sans-serif;
@@ -41,17 +37,13 @@
             perspective: 2000px;
             touch-action: none;
         }
-
         /* Cinematic Background */
         .stage-backdrop {
             position: fixed;
             inset: 0;
-            background: 
-                radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-                linear-gradient(to bottom, #0a0b10, #000000);
+            background: radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(212, 175, 55, 0.08) 0%, transparent 60%), linear-gradient(to bottom, #0a0b10, #000000);
             z-index: -1;
         }
-
         .noise-grain {
             position: fixed;
             inset: 0;
@@ -60,7 +52,6 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             z-index: -1;
         }
-
         /* The Monolith Container */
         .card-monolith {
             width: 90vw;
@@ -70,56 +61,42 @@
             transform-style: preserve-3d;
             will-change: transform;
         }
-
         .card-surface {
             position: absolute;
             inset: 0;
             background: linear-gradient(160deg, #16181d 0%, #030304 100%);
             border-radius: 24px;
             /* Luxurious multi-shadow */
-            box-shadow: 
-                0 0 0 1px rgba(212, 175, 55, 0.15),
-                0 30px 80px -10px rgba(0,0,0,0.9),
-                0 10px 30px -5px rgba(0,0,0,0.5),
-                inset 0 0 60px rgba(0,0,0,0.8);
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.15), 0 30px 80px -10px rgba(0,0,0,0.9), 0 10px 30px -5px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.8);
             display: flex;
             flex-direction: column;
             padding: calc(var(--safe-top) + 2rem) 2rem calc(var(--safe-bottom) + 2rem);
             overflow: hidden;
             transform-style: preserve-3d;
         }
-
         /* Dynamic Reflective Border */
         .gold-border {
             position: absolute;
             inset: 0;
             border-radius: 24px;
             padding: 1.5px;
-            background: linear-gradient(var(--angle, 135deg), 
-                rgba(212, 175, 55, 0.1), 
-                var(--gold-main), 
-                rgba(212, 175, 55, 0.1));
+            background: linear-gradient(var(--angle, 135deg), rgba(212, 175, 55, 0.1), var(--gold-main), rgba(212, 175, 55, 0.1));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: exclude;
             pointer-events: none;
             opacity: 0.8;
             z-index: 2;
         }
-
         /* Spotlight Beam */
         .spotlight {
             position: absolute;
             inset: -150%;
-            background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), 
-                rgba(255, 255, 255, 0.06) 0%, 
-                transparent 45%);
+            background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 45%);
             mix-blend-mode: overlay;
             pointer-events: none;
             z-index: 3;
         }
-
         /* --- Content Layers --- */
-        
         /* 1. Seal Layer */
         .layer-seal {
             transform: translateZ(40px);
@@ -128,7 +105,6 @@
             /* Gold Glow behind logo */
             filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.15));
         }
-
         /* 2. Identity Layer */
         .layer-identity {
             text-align: center;
@@ -136,7 +112,6 @@
             width: 100%;
             margin-bottom: auto;
         }
-
         .title-prefix {
             font-size: 0.9rem;
             color: var(--gold-rich);
@@ -146,27 +121,19 @@
             text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
-
         .name-sculpted {
             font-family: 'Frank Ruhl Libre', serif;
             font-size: clamp(2.8rem, 13vw, 4.2rem);
             font-weight: 900;
             line-height: 0.9;
             /* Dynamic reflection based on tilt */
-            background: linear-gradient(
-                calc(var(--angle, 135deg) + 180deg), 
-                #fff 10%, 
-                var(--gold-main) 40%, 
-                var(--gold-dark) 70%,
-                var(--gold-shadow) 100%
-            );
+            background: linear-gradient( calc(var(--angle, 135deg) + 180deg), #fff 10%, var(--gold-main) 40%, var(--gold-dark) 70%, var(--gold-shadow) 100% );
             background-size: 150% 150%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
             letter-spacing: -0.02em;
         }
-
         .role-engraved {
             margin-top: 1.2rem;
             font-size: 0.9rem;
@@ -175,7 +142,6 @@
             font-weight: 400;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
-
         .divider-ornament {
             display: flex;
             align-items: center;
@@ -184,10 +150,21 @@
             margin-top: 1.5rem;
             opacity: 0.6;
         }
-        .line { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-main)); }
-        .line.rev { background: linear-gradient(90deg, var(--gold-main), transparent); }
-        .diamond { width: 6px; height: 6px; background: var(--gold-main); transform: rotate(45deg); box-shadow: 0 0 10px var(--gold-main); }
-
+        .line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-main));
+        }
+        .line.rev {
+            background: linear-gradient(90deg, var(--gold-main), transparent);
+        }
+        .diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--gold-main);
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--gold-main);
+        }
         /* 3. Action Layer - Obsidian Buttons */
         .actions-stack {
             width: 100%;
@@ -197,7 +174,6 @@
             transform: translateZ(60px);
             margin-bottom: 1.5rem;
         }
-
         .btn-obsidian {
             position: relative;
             display: flex;
@@ -214,7 +190,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-
         .btn-obsidian::before {
             content: '';
             position: absolute;
@@ -223,28 +198,26 @@
             transform: translateX(-100%);
             transition: 0.5s;
         }
-
         .btn-obsidian:active {
             transform: scale(0.97) translateZ(-5px);
             border-color: var(--gold-main);
             box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
-
         @media (hover: hover) {
             .btn-obsidian:hover {
                 transform: translateY(-2px);
                 border-color: var(--gold-main);
                 box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             }
-            .btn-obsidian:hover::before { transform: translateX(100%); }
+            .btn-obsidian:hover::before {
+                transform: translateX(100%);
+            }
         }
-
         .btn-label {
             font-weight: 600;
             letter-spacing: 0.05em;
             font-size: 1rem;
         }
-
         .bsd {
             position: absolute;
             top: var(--safe-top);
@@ -256,7 +229,6 @@
             opacity: 0.7;
             transform: translateZ(20px);
         }
-
         .footer-auth {
             font-size: 10px;
             color: var(--gold-dark);
@@ -267,41 +239,46 @@
             text-transform: uppercase;
             transform: translateZ(20px);
         }
+
+        /* שיפורים: התאמה מלאה למובייל + אופטימיזציה */
+        @media (max-width: 480px) {
+            .card-monolith { max-width: 340px; height: clamp(520px, 82dvh, 720px); }
+            .card-surface { padding: calc(var(--safe-top) + 1.5rem) 1.5rem calc(var(--safe-bottom) + 1.5rem); }
+            .name-sculpted { font-size: clamp(2.4rem, 12vw, 3.8rem); }
+            .btn-obsidian { padding: 1rem 1.2rem; font-size: 0.95rem; }
+        }
+
+        /* נגישות: aria labels לכפתורים */
+        .btn-obsidian[aria-label] { cursor: pointer; }
     </style>
 </head>
 <body>
-
     <div class="noise-grain"></div>
     <div class="stage-backdrop" id="stage"></div>
-
     <div class="card-monolith" id="cardContainer">
         <div class="card-surface">
             <div class="gold-border"></div>
             <div class="spotlight" id="spotlight"></div>
             <div class="bsd">בס"ד</div>
-            
             <!-- Majestic Scales Logo -->
             <div class="layer-seal">
                 <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <!-- Central Sword of Justice -->
                     <path d="M50 10 V85" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M42 20 H58" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/> <!-- Sword Handle -->
-                    <path d="M50 85 L46 78 H54 L50 85 Z" fill="url(#goldGrad)"/> <!-- Tip -->
-                    
+                    <path d="M42 20 H58" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Sword Handle -->
+                    <path d="M50 85 L46 78 H54 L50 85 Z" fill="url(#goldGrad)"/>
                     <!-- Balance Beam -->
                     <path d="M20 30 Q50 20 80 30" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round"/>
                     <circle cx="50" cy="25" r="3" fill="var(--gold-main)" stroke="var(--onyx-black)" stroke-width="1"/>
-
                     <!-- Left Scale Pan -->
                     <path d="M20 30 L15 55" stroke="url(#goldGrad)" stroke-width="1"/>
                     <path d="M20 30 L25 55" stroke="url(#goldGrad)" stroke-width="1"/>
                     <path d="M10 55 Q20 65 30 55" stroke="url(#goldGrad)" stroke-width="1.5" fill="rgba(212, 175, 55, 0.1)"/>
-
                     <!-- Right Scale Pan -->
                     <path d="M80 30 L75 55" stroke="url(#goldGrad)" stroke-width="1"/>
                     <path d="M80 30 L85 55" stroke="url(#goldGrad)" stroke-width="1"/>
                     <path d="M70 55 Q80 65 90 55" stroke="url(#goldGrad)" stroke-width="1.5" fill="rgba(212, 175, 55, 0.1)"/>
-
                     <defs>
                         <linearGradient id="goldGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
                             <stop offset="0%" stop-color="var(--gold-light)"/>
@@ -311,10 +288,9 @@
                     </defs>
                 </svg>
             </div>
-
             <!-- Identity -->
             <div class="layer-identity">
-                <div class="prefix">הרב</div>
+                <div class="title-prefix">הרב</div>
                 <h1 class="name-sculpted">אלדר לוי</h1>
                 <div class="divider-ornament">
                     <div class="line"></div>
@@ -323,26 +299,23 @@
                 </div>
                 <div class="role-engraved">טוען רבני • דיין מוסמך</div>
             </div>
-
             <!-- Actions -->
             <div class="actions-stack">
-                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-obsidian" onclick="event.stopPropagation()">
+                <a href="https://my-rabbinic-website.github.io/ELDAR-LEVI-OFIC2/" target="_blank" class="btn-obsidian" onclick="event.stopPropagation()" aria-label="מעבר לאתר הרשמי">
                     <div class="flex items-center gap-4">
                         <i data-lucide="globe" size="20" class="text-[#c6a87c]"></i>
                         <span class="btn-label">האתר הרשמי</span>
                     </div>
                     <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
                 </a>
-
-                <a href="tel:0528219928" class="btn-obsidian" onclick="event.stopPropagation()">
+                <a href="tel:0528219928" class="btn-obsidian" onclick="event.stopPropagation()" aria-label="חיוג ישיר">
                     <div class="flex items-center gap-4">
                         <i data-lucide="phone" size="20" class="text-[#c6a87c]"></i>
                         <span class="btn-label">חיוג ישיר</span>
                     </div>
                     <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
                 </a>
-
-                <a href="mailto:Tifarteha@gmail.com" class="btn-obsidian" onclick="event.stopPropagation()">
+                <a href="mailto:Tifarteha@gmail.com" class="btn-obsidian" onclick="event.stopPropagation()" aria-label="פנייה דיסקרטית">
                     <div class="flex items-center gap-4">
                         <i data-lucide="mail" size="20" class="text-[#c6a87c]"></i>
                         <span class="btn-label">פנייה דיסקרטית</span>
@@ -350,85 +323,65 @@
                     <i data-lucide="chevron-left" size="18" class="opacity-30"></i>
                 </a>
             </div>
-
             <!-- Footer -->
-            <div class="footer-auth">
-                Supreme Rabbinic Authority
-            </div>
+            <div class="footer-auth"> Supreme Rabbinic Authority </div>
         </div>
     </div>
-
     <script>
         lucide.createIcons();
-
         const card = document.getElementById('cardContainer');
         const stage = document.getElementById('stage');
         const spotlight = document.getElementById('spotlight');
         const root = document.documentElement;
-
         // State for physics
         let currentX = window.innerWidth / 2, currentY = window.innerHeight / 2;
         let targetX = currentX, targetY = currentY;
         let rotationX = 0, rotationY = 0;
-
         // Smooth Animation Loop
         function animate() {
             // Smooth follow
             currentX += (targetX - currentX) * 0.06;
             currentY += (targetY - currentY) * 0.06;
-
             // Update background focus
             stage.style.setProperty('--px', `${currentX}px`);
             stage.style.setProperty('--py', `${currentY}px`);
-
             // Calculate rotation
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-            
             // Limit rotation to 8 degrees for stability
-            const nextRotY = (currentX - centerX) / 40; 
+            const nextRotY = (currentX - centerX) / 40;
             const nextRotX = (centerY - currentY) / 40;
-
             rotationX += (nextRotX - rotationX) * 0.1;
             rotationY += (nextRotY - rotationY) * 0.1;
-
             card.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
-
             // Calculate dynamic light angle
             const angle = Math.atan2(currentY - centerY, currentX - centerX) * (180 / Math.PI) + 135;
             root.style.setProperty('--angle', `${angle}deg`);
-
             // Spotlight position (Inverse parallax for depth)
             const spotX = 50 + (rotationY * 2);
             const spotY = 50 + (-rotationX * 2);
             spotlight.style.setProperty('--spot-x', `${spotX}%`);
             spotlight.style.setProperty('--spot-y', `${spotY}%`);
-
             requestAnimationFrame(animate);
         }
-
         // Input Handlers
         const handleInput = (e) => {
             targetX = e.clientX || (e.touches && e.touches[0].clientX);
             targetY = e.clientY || (e.touches && e.touches[0].clientY);
         };
-
         window.addEventListener('mousemove', handleInput);
-        
         window.addEventListener('touchmove', (e) => {
             // Allow scroll only on button area, otherwise prevent for effect
             if (!e.target.closest('.btn-obsidian')) {
-                // Optional: e.preventDefault() if you want to lock page
-                handleInput(e);
+                e.preventDefault();
             }
-        }, { passive: true });
-
+            handleInput(e);
+        }, { passive: false });
         // Auto-center on release
         window.addEventListener('touchend', () => {
             targetX = window.innerWidth / 2;
             targetY = window.innerHeight / 2;
         });
-
         // Device Orientation (High-End Mobile Polish)
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
@@ -436,14 +389,12 @@
                     // Convert tilt to screen coordinates
                     const tiltX = Math.min(Math.max(e.gamma, -45), 45);
                     const tiltY = Math.min(Math.max(e.beta - 45, -45), 45);
-                    
                     targetX = (window.innerWidth / 2) + (tiltX * 5);
                     targetY = (window.innerHeight / 2) + (tiltY * 5);
                 }
             });
         }
-
-        // Particle System: Sacred Dust
+        // Particle System: Sacred Dust - Optimized for performance
         const canvas = document.createElement('canvas');
         canvas.style.position = 'fixed';
         canvas.style.inset = '0';
@@ -451,7 +402,6 @@
         canvas.style.pointerEvents = 'none';
         document.body.appendChild(canvas);
         const ctx = canvas.getContext('2d');
-
         let particles = [];
         const initParticles = () => {
             canvas.width = window.innerWidth;
@@ -464,7 +414,6 @@
                 opacity: Math.random() * 0.3
             }));
         };
-
         const drawParticles = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#b38728';
@@ -478,7 +427,6 @@
             });
             requestAnimationFrame(drawParticles);
         };
-
         window.addEventListener('resize', initParticles);
         initParticles();
         drawParticles();
@@ -486,4 +434,6 @@
     </script>
 </body>
 </html>
-
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
